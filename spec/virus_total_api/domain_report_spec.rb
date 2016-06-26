@@ -52,5 +52,34 @@ describe VirusTotalApi::DomainReport do
     subject { report }
 
     it { is_expected.to respond_to :response }
+
+    describe '#response' do
+      context 'when a response has been cached' do
+        let(:cached_response) { { test: 'wibble' } }
+        before { subject.instance_variable_set('@cached_response', cached_response) }
+
+        it { expect(subject.response).to eq cached_response }
+      end
+
+      context 'when there is no cached response' do
+        let(:cached_response) { { test: 'wibble' } }
+
+        before do
+          allow(RestClient).to receive(:get).and_return(cached_response.to_json)
+          subject.instance_variable_set('@cached_response', nil)
+        end
+
+        it 'calls the API with RestClient' do
+          expect(RestClient).to receive(:get)
+          subject.response
+        end
+
+        it 'sets @cached_response' do
+          expect { subject.response }
+            .to change { subject.instance_variable_get('@cached_response') }
+            .from(nil).to(cached_response)
+        end
+      end
+    end
   end
 end

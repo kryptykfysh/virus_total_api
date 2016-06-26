@@ -2,6 +2,8 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/core_ext'
 require 'json'
 require 'rest-client'
 require_relative '../virus_total_api'
@@ -28,7 +30,9 @@ module VirusTotalApi
     end
 
     def response
-      JSON.parse(RestClient.get(self.class.api_uri, params: params))
+      @cached_response ||= JSON.parse(
+        RestClient.get(self.class.api_uri, params: params)
+      ).symbolize_keys
     end
 
     private
