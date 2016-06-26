@@ -15,11 +15,11 @@ module VirusTotalApi
       @api_key = api_key
     end
 
-    # Looks up the provided Domain Name argument and returns a Domain Report
+    # Looks up the provided Domain Name argument and returns a response Hash
     # @params <String> the domain name to query
-    # @return <VirusTotalApi::DomainReport>
+    # @return <Hash>
     def domain_report(domain)
-      DomainReport.new(api_key: @api_key, domain: domain)
+      DomainReport.new(api_key: @api_key, domain: domain).response
     end
   end
 end

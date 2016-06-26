@@ -52,8 +52,12 @@ describe VirusTotalApi::Client do
 
       context 'with a domain name argument' do
         let(:domain) { 'example.com' }
+        let(:response_hash) { { wibble: 'arse' } }
 
-        it { expect(subject.domain_report(domain)).to be_an_instance_of VirusTotalApi::DomainReport }
+        before { allow(RestClient).to receive(:get).and_return(response_hash.to_json) }
+
+        it { expect(subject.domain_report(domain)).to be_an_instance_of Hash }
+        it { expect(subject.domain_report(domain)).to eq response_hash }
       end
     end
   end
