@@ -33,6 +33,7 @@ module VirusTotalApi
       @api_key = api_key
     end
 
+    # @return [Hash] response from the VirusTotal API
     def response
       @cached_response ||= JSON.parse(
         RestClient.get(self.class.report_uri, params: params)

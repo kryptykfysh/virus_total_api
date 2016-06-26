@@ -13,8 +13,8 @@ module VirusTotalApi
     attr_reader :domain
 
     # Returns a VirusTotalApi::DomainReport instance
-    # params api_key <String> a valid VT API Key
-    # @params domain <String> the domain name to report on
+    # @param api_key <String> a valid VT API Key
+    # @param domain <String> the domain name to report on
     # @return <VirusTotalApi::DomainReport>
     def initialize(api_key:, domain:)
       super(api_key: api_key)
