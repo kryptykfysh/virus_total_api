@@ -2,7 +2,9 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+require_relative './report'
 require_relative './domain_report'
+require_relative './file_scan_report'
 
 module VirusTotalApi
   # Class providing clients to connect to the VirusTotal API
