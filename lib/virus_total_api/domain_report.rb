@@ -24,7 +24,7 @@ module VirusTotalApi
     private
 
     def params
-      super.merge({ domain: @domain })
+      super.merge(domain: @domain)
     end
   end
 end

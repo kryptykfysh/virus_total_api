@@ -6,7 +6,7 @@ require 'spec_helper'
 require 'support/shared_examples_for_reports'
 
 describe VirusTotalApi::DomainReport do
-  include_examples 'virus total api report', { api_key: 'a' * 64, domain: 'example.com' }
+  include_examples 'virus total api report', api_key: 'a' * 64, domain: 'example.com'
 
   let(:api_key) { 'a' * 64 }
   let(:domain) { 'example.com' }
