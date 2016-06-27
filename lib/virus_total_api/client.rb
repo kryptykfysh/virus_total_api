@@ -5,6 +5,7 @@
 require_relative './report'
 require_relative './domain_report'
 require_relative './file_scan_report'
+require_relative './url_report'
 
 module VirusTotalApi
   # Class providing clients to connect to the VirusTotal API

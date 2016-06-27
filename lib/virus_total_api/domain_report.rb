@@ -9,13 +9,13 @@ module VirusTotalApi
   class DomainReport < Report
     self.report_path = '/domain/report'
 
-    # @return <String> the domain name being queried
+    # @return [String] the domain name being queried
     attr_reader :domain
 
     # Returns a VirusTotalApi::DomainReport instance
-    # @param api_key <String> a valid VT API Key
-    # @param domain <String> the domain name to report on
-    # @return <VirusTotalApi::DomainReport>
+    # @param api_key [String] a valid VT API Key
+    # @param domain [String] the domain name to report on
+    # @return [VirusTotalApi::DomainReport]
     def initialize(api_key:, domain:)
       super(api_key: api_key)
       @domain = domain
