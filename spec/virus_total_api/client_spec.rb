@@ -44,6 +44,8 @@ describe VirusTotalApi::Client do
     subject { client }
 
     it { is_expected.to respond_to :domain_report }
+    it { is_expected.to respond_to :file_report }
+    it { is_expected.to respond_to :url_report }
 
     describe '#domain_report' do
       context 'without a domain name argument' do
@@ -58,6 +60,38 @@ describe VirusTotalApi::Client do
 
         it { expect(subject.domain_report(domain)).to be_an_instance_of Hash }
         it { expect(subject.domain_report(domain)).to eq response_hash }
+      end
+    end
+
+    describe '#file_report' do
+      context 'without a file hash argument' do
+        it { expect { subject.file_report }.to raise_error ArgumentError }
+      end
+
+      context 'with a file name argument' do
+        let(:file_hash) { '1' * 64 }
+        let(:response_hash) { { wibble: 'arse' } }
+
+        before { allow(RestClient).to receive(:get).and_return(response_hash.to_json) }
+
+        it { expect(subject.file_report(file_hash)).to be_an_instance_of Hash }
+        it { expect(subject.file_report(file_hash)).to eq response_hash }
+      end
+    end
+
+    describe '#url_report' do
+      context 'without a url argument' do
+        it { expect { subject.url_report }.to raise_error ArgumentError }
+      end
+
+      context 'with a valid URL argument' do
+        let(:url) { 'http://example.com' }
+        let(:response_hash) { { wibble: 'arse' } }
+
+        before { allow(RestClient).to receive(:get).and_return(response_hash.to_json) }
+
+        it { expect(subject.url_report(url)).to be_an_instance_of Hash }
+        it { expect(subject.url_report(url)).to eq response_hash }
       end
     end
   end

@@ -24,5 +24,19 @@ module VirusTotalApi
     def domain_report(domain)
       DomainReport.new(api_key: @api_key, domain: domain).response
     end
+
+    # Looks up the provided file hash argument and returns a response Hash
+    # @param file_hash [String] the file hash to query
+    # @return [Hash]
+    def file_report(file_hash)
+      FileScanReport.new(api_key: @api_key, resource: file_hash).response
+    end
+
+    # Looks up the provided URL argument and returns a response Hash
+    # @param url [String] the URL to look up
+    # @return [Hash]
+    def url_report(url)
+      URLReport.new(api_key: @api_key, resource: url).response
+    end
   end
 end
